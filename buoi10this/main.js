@@ -69,3 +69,16 @@ addExpr(2,5,6,7,8,9)
 var addArrow=(a,b)=>a+b
 
 
+const obj = {
+    name: 'John',
+    regularFunc: function() {
+        console.log(this.name);
+    },
+    arrowFunc: () => {
+        console.log(this.name);
+    }
+    
+  };
+  
+  obj.regularFunc(); // Output: John
+  obj.arrowFunc();   // Output: undefined
