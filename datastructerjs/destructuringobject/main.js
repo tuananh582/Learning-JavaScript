@@ -69,6 +69,12 @@ const obj = {a:23,b:7,c:14};
  console.log(open,close)
 
 
+
+
+
+
+ 
+
 //  let [a,,,b]=restaurant.categories;
 //  [a,b]=[b,a]
 //  console.log(a,b)
