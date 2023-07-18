@@ -40,6 +40,6 @@ const restaurant ={
  };
 
  //Nullish : null and undefined (Not 0 or '')
- restaurant.numerGuse=''
+ restaurant.numerGuse=0
  const guestCorrt = restaurant.numerGuse ?? 10
  console.log(guestCorrt)
