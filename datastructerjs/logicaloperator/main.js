@@ -11,8 +11,8 @@ const rest2={
 rest1.namGuests = rest1.namGuests || 10;
 rest2.namGuests = rest2.namGuests || 10;
 
-// rest1.namGuests||=10
-// rest2.namGuests||=10
+// // rest1.namGuests||=10
+// // rest2.namGuests||=10
 console.log(rest1)
 console.log(rest2)
 console.log('after')
