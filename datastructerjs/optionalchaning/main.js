@@ -1,3 +1,5 @@
+'use strict'
+
 const restaurant ={
     name :'Tuan Anh',
     location:'New York',
@@ -66,3 +68,6 @@ const open = restaurant.openingHours[day]?.open ?? 'closed'
     email:'Hello@gmail',
  }];
 console.log(users[0]?.name??'User array empty')
+
+
+
