@@ -37,16 +37,16 @@ const game = {
       x: 3.25,
       team2: 6.5,
     },
+
+   
    
 
   };
 
   //Task 1 :
 for(const [i,player] of  game.scored.entries()){
-    console.log(`Goal ${i+1} :${player} `)
+    console.log(`Goal ${i+1} : ${player} `)
 }
-
-
 // Task 2 :
 const odds=Object.values(game.odds)
 let avarage=0
@@ -67,6 +67,15 @@ for(const [team,odd] of Object.entries(game.odds)){
 
     console.log(`Odd of ${teamStr} ${odd}`)
 }
+
+
+const [player1,player2]=game.players; // Continue thinking
+//  const team1=[game.team1,...player1]
+//  const team2=[game.team2,...player2]
+for(const team of player1){
+
+}
+console.log(team1);
 
 
 
