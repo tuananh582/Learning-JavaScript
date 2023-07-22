@@ -73,10 +73,12 @@ for(const [key,value] of question){
 
 }
 
+
 // const anwer= Number(prompt('Your answer'))
 const answer=3
 // if(answer!=)
 console.log(question.get(question.get('Correct')===answer ))
+// console.log(question.get( anwer.valueOf === 'number' ))
 
 // convert map to an  array
 console.log([...question])
