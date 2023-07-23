@@ -89,3 +89,4 @@ console.log( typeof new String('Jonas'))
 console.log( typeof new String('Jonas'))
 console.log( typeof new String('Jonas').slice(1)) // when we call method on a string Javascript will return string Even if called on a string object
 
+
