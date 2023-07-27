@@ -80,3 +80,5 @@ console.log(rest.size)
 
 // console.log(rest.get([1,2]))//   this arrray
 console.log(rest.get(arr))
+
+
