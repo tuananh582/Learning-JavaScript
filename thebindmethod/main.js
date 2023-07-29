@@ -83,3 +83,4 @@ const addVat2= addTaxrate(0.23)
 console.log(addVat2(100))
 console.log(addVat2(23))
 
+// console.log(addTaxrate(0.23)(100))
