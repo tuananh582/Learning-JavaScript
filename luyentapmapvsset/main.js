@@ -26,39 +26,64 @@
 // console.log(rest)
 
 //Set
-const rest = new Set()
-rest.add({
-    name:'tuananh',
-    age:18,
-})
-rest.add({
-    hotel:'restaurant'
-})
-// console.log(rest)
-console.log(rest.has(3))
-const staff = ['Chef','Service','Assitant Chef','Manager']
-const newarr =[...new Set(staff)]
-console.log(newarr)
+// const rest = new Set()
+// rest.add({
+//     name:'tuananh',
+//     age:18,
+// })
+// rest.add({
+//     hotel:'restaurant'
+// })
+// // console.log(rest)
+// console.log(rest.has(3))
+// const staff = ['Chef','Service','Assitant Chef','Manager']
+// const newarr =[...new Set(staff)]
+// console.log(newarr)
 
-for(const day of rest.values()){
-    console.log(day)
-}
+// for(const day of rest.values()){
+//     console.log(day)
+// }
 
 
-const nameChange = function(name){
-    const dlname=name.split(' ')
-    const upername=[]
-    for(const names of dlname){
-        upername.push(names.replace(names[0],names[0].toUpperCase()))
-        // upername.push(names[0].toUpperCase()+names.slice(1))
+// const nameChange = function(name){
+//     const dlname=name.split(' ')
+//     const upername=[]
+//     for(const names of dlname){
+//         upername.push(names.replace(names[0],names[0].toUpperCase()))
+//         // upername.push(names[0].toUpperCase()+names.slice(1))
+//     }
+//     console.log(upername.join('-'))
+
+
+// }
+// nameChange('pham tuan anh')
+// nameChange('anna david micheal')
+
+const inforperson=[
+    {
+        id:1,
+        name:'Tuan Anh',
+    },
+    {
+        id:2,
+        name:'Phuong Anh Bbi',
+    },
+    {
+        id:3,
+        name:'Truong Ngoc Ha'
     }
-    console.log(upername.join('-'))
+]
 
+const person = new Set()
+for(const value of inforperson){
+    person.add(value)
 
 }
-nameChange('pham tuan anh')
-nameChange('anna david micheal')
+console.log(person)
 
+//convert to array
+const person2 = [...person]
+console.log(person2)
 
 
 
