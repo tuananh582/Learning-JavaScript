@@ -86,4 +86,37 @@ const person2 = [...person]
 console.log(person2)
 
 
+// const myMap = new Map();
+// myMap.set("key1", "value1");
+// myMap.set("key2", "value2");
+// myMap.set("key3", "value3");
+
+// const myArray = [...myMap];
+// console.log(myArray);
+
+// const myMap = new Map();
+// myMap.set("key1", "value1");
+// myMap.set("key2", "value2");
+// myMap.set("key3", "value3");
+
+// const myArray = Array.from(myMap);
+// console.log(myArray);
+
+const myMap = new Map();
+myMap.set("key1", "value1");
+myMap.set("key2", "value2");
+myMap.set("key3", "value3");
+
+// const valuesArray = Array.from(myMap.values());
+// const keysArray = Array.from(myMap.keys());
+
+// console.log(valuesArray);
+// console.log(keysArray);
+
+// for (const [key,value] of myMap)
+// {
+//     console.log(`${key} : ${value}`)
+// }
+
+
 
