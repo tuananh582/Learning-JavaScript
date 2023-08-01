@@ -78,8 +78,17 @@ const displayMovements=function(movements){
 }
 displayMovements(account1.movements)
 
+const creatUserNames = function(accs){
+  accs.forEach(function(acc){
+   acc.username=acc.owner.toLowerCase().split(' ').map(name => name[0]).join('');// Create username
+  })
 
+//   const username = user.toLowerCase().split(' ').map(name => name[0]).join('');
+//  return username;
+}
 
+creatUserNames(accounts)
+console.log(accounts)
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
