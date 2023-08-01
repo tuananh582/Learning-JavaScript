@@ -89,6 +89,22 @@ const creatUserNames = function(accs){
 
 creatUserNames(accounts)
 console.log(accounts)
+const calcPrintBalance =function(movements){
+  const balance=movements.reduce((acc,cur)=>acc+cur,0)
+  labelBalance.textContent=` $ ${balance}`
+
+}
+
+calcPrintBalance(account1.movements);
+
+//Maximum value
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300]
+
+
+
+
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -100,5 +116,32 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const max = movements.reduce((acc,mov)=>{
+//   if(acc>mov){
+//   return acc;
+//   }
+//   else{
+//     return mov;
+//   }
+
+// },movements[0])
+const max = movements.reduce((acc,mov)=>{
+  
+    if(acc>mov){
+      return acc
+    }
+    else{
+      return mov
+    }
+},movements[0])
+console.log(max)
 
 /////////////////////////////////////////////////
+
+// const fruits = ['apple', 'banana', 'orange', 'apple', 'banana', 'apple'];
+
+// const fruitCounts = fruits.reduce((accumulator, fruit) => {
+//   console.log(`${accumulator} , ${fruit}`)
+//   accumulator[fruit] = (accumulator[fruit] || 0) + 1;
+//   return accumulator;
+// }, {});
