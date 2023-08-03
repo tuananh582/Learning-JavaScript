@@ -121,7 +121,7 @@ btnLogin.addEventListener('click',function(e){
 
   e.preventDefault()
 
-   currentAccount=accounts.find(acc=>acc.username===inputLoginUsername.value)
+   currentAccount=accounts.find(acc=>acc.username ===inputLoginUsername.value || acc.owner===inputLoginUsername.value)
   //  currentAccount=accounts.find(acc=>{
   //       return acc.username||acc.owner===inputLoginUsername.value
   //  })
