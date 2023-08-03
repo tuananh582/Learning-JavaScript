@@ -6,28 +6,28 @@
 
 // Data
 const account1 = {
-  owner: 'Jonas Schmedtmann',
+  owner: 'Tuan Anh',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
 };
 
 const account2 = {
-  owner: 'Jessica Davis',
+  owner: 'Phuong Anh',
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
 };
 
 const account3 = {
-  owner: 'Steven Thomas Williams',
+  owner: 'Truong Ngoc Ha',
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
 };
 
 const account4 = {
-  owner: 'Sarah Smith',
+  owner: 'Dieu Anh',
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
@@ -78,7 +78,6 @@ const displayMovements=function(movements){
         // console.log(containerMovements.innerHTML)
     })
 }
-displayMovements(account1.movements)
 
 const creatUserNames = function(accs){
   accs.forEach(function(acc){
@@ -89,21 +88,23 @@ const creatUserNames = function(accs){
 //  return username;
 }
 
-const calcDisplaySummary = function(movements){
-  const incomes= movements.filter(mov=>mov>0).reduce((acc,mov)=>acc+mov,0)
+creatUserNames(accounts)
+const calcDisplaySummary = function(acc){
+  const incomes=acc.movements.filter(mov=>mov>0).reduce((acc,mov)=>acc+mov,0)
   labelSumIn.textContent=`${incomes} $ `
 
-  const out= movements.filter(mov=>mov<0).reduce((acc,mov)=>acc+mov,0)
+  const out= acc.movements.filter(mov=>mov<0).reduce((acc,mov)=>acc+mov,0)
   labelSumOut.textContent=`${Math.abs(out)} $ ` // remove sign , negative value
   
-  const interest = movements.filter(mov=>mov>0).map(deposit=>deposit*1.2/100).filter((int,i,array)=>{
+  // const interest = movements.filter(mov=>mov>0).map(deposit=>deposit*1.2/100).filter((int,i,array)=>{
+  //   return int>=10
+  // }).reduce((acc,int)=>acc+int,0);
+  const interest = movements.filter(mov=>mov>0).map(deposit=>deposit*acc.interestRate/100).filter((int,i,array)=>{
     return int>=10
   }).reduce((acc,int)=>acc+int,0);
   labelSumInterest.textContent=`${interest} $`
 }
-calcDisplaySummary(account1.movements)
 
-creatUserNames(accounts)
 console.log(accounts)
 const calcPrintBalance =function(movements){
   const balance=movements.reduce((acc,cur)=>acc+cur,0)
@@ -112,7 +113,44 @@ const calcPrintBalance =function(movements){
 
 }
 
-calcPrintBalance(account1.movements);
+//Event Handler
+let currentAccount;
+
+btnLogin.addEventListener('click',function(e){
+  //Prevent form from submitting 
+
+  e.preventDefault()
+
+   currentAccount=accounts.find(acc=>acc.username===inputLoginUsername.value)
+  //  currentAccount=accounts.find(acc=>{
+  //       return acc.username||acc.owner===inputLoginUsername.value
+  //  })
+  // console.log('Login')
+  console.log(currentAccount)
+  if(currentAccount?.pin===Number(inputLoginPin.value)){
+    //Display Ui and message
+    console.log('login')
+    // labelWelcome.textContent=`Welecomback, ${currentAccount.owner.split(' ')[0]}`; // Welcomback First Name
+    labelWelcome.textContent=`Welecomback, ${currentAccount.owner}`; // Welcomback Full Name
+    containerApp.style.opacity=100;
+    //Clear input fields
+    inputLoginUsername.value=inputLoginPin.value='';
+    // inputLoginPin.value=inputLoginUsername.value='';
+    inputLoginPin.blur()
+
+
+    //DisPlay movement
+  displayMovements(currentAccount.movements)
+    //Display balance 
+  calcPrintBalance(currentAccount.movements);
+    //Display summary
+  calcDisplaySummary(currentAccount)
+
+
+
+  };
+  
+})
 
 //Maximum value
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300]
