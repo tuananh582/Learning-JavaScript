@@ -32,6 +32,8 @@ const account4 = {
   interestRate: 1,
   pin: 4444,
 };
+console.dir(account4)
+console.log(account4)
 
 const accounts = [account1, account2, account3, account4];
 
@@ -69,11 +71,11 @@ const displayMovements=function(movements){
         const html =`
         <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i+1} ${type}</div>
-        <div class="movements__value">${mov}</div>
+        <div class="movements__value">${mov} $</div>
       </div>
         `
         containerMovements.insertAdjacentHTML('afterbegin',html)
-        console.log(containerMovements.innerHTML)
+        // console.log(containerMovements.innerHTML)
     })
 }
 displayMovements(account1.movements)
@@ -87,11 +89,26 @@ const creatUserNames = function(accs){
 //  return username;
 }
 
+const calcDisplaySummary = function(movements){
+  const incomes= movements.filter(mov=>mov>0).reduce((acc,mov)=>acc+mov,0)
+  labelSumIn.textContent=`${incomes} $ `
+
+  const out= movements.filter(mov=>mov<0).reduce((acc,mov)=>acc+mov,0)
+  labelSumOut.textContent=`${Math.abs(out)} $ ` // remove sign , negative value
+  
+  const interest = movements.filter(mov=>mov>0).map(deposit=>deposit*1.2/100).filter((int,i,array)=>{
+    return int>=10
+  }).reduce((acc,int)=>acc+int,0);
+  labelSumInterest.textContent=`${interest} $`
+}
+calcDisplaySummary(account1.movements)
+
 creatUserNames(accounts)
 console.log(accounts)
 const calcPrintBalance =function(movements){
   const balance=movements.reduce((acc,cur)=>acc+cur,0)
   labelBalance.textContent=` $ ${balance}`
+  
 
 }
 
@@ -145,3 +162,14 @@ console.log(max)
 //   accumulator[fruit] = (accumulator[fruit] || 0) + 1;
 //   return accumulator;
 // }, {});
+
+const euroToUsd=1.1
+console.log(movements)
+const totalDepositToUsd=movements.filter(mov=>mov>0)
+// .map(mov=>mov*euroToUsd)
+.map((mov,i,array)=>{
+    // console.log(array) 
+  return mov*euroToUsd
+})
+.reduce((acc,mov)=>acc+mov,0)
+console.log(totalDepositToUsd)
