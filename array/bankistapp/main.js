@@ -99,20 +99,27 @@ const calcDisplaySummary = function(acc){
   // const interest = movements.filter(mov=>mov>0).map(deposit=>deposit*1.2/100).filter((int,i,array)=>{
   //   return int>=10
   // }).reduce((acc,int)=>acc+int,0);
-  const interest = movements.filter(mov=>mov>0).map(deposit=>deposit*acc.interestRate/100).filter((int,i,array)=>{
+  const interest =acc.movements.filter(mov=>mov>0).map(deposit=>deposit*acc.interestRate/100).filter((int,i,array)=>{
     return int>=10
   }).reduce((acc,int)=>acc+int,0);
   labelSumInterest.textContent=`${interest} $`
 }
 
 console.log(accounts)
-const calcPrintBalance =function(movements){
-  const balance=movements.reduce((acc,cur)=>acc+cur,0)
-  labelBalance.textContent=` $ ${balance}`
+const calcPrintBalance =function(acc){
+  acc.balance=acc.movements.reduce((acc,cur)=>acc+cur,0)
+  // acc.balance=balance
+  labelBalance.textContent=` $ ${acc.balance}`
   
 
 }
-
+const updateUi=function(acc){ // Refactoring code
+  displayMovements(acc.movements)
+  //Display balance 
+calcPrintBalance(acc);
+  //Display summary
+calcDisplaySummary(acc)
+}
 //Event Handler
 let currentAccount;
 
@@ -140,11 +147,11 @@ btnLogin.addEventListener('click',function(e){
 
 
     //DisPlay movement
-  displayMovements(currentAccount.movements)
-    //Display balance 
-  calcPrintBalance(currentAccount.movements);
-    //Display summary
-  calcDisplaySummary(currentAccount)
+
+
+    updateUi(currentAccount)
+
+  
 
 
 
@@ -152,8 +159,22 @@ btnLogin.addEventListener('click',function(e){
   
 })
 
-//Maximum value
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300]
+btnTransfer.addEventListener('click',function(e){
+  e.preventDefault()
+  const amount= Number(inputTransferAmount.value)
+  const receiveAcc= accounts.find ((acc)=>acc.username===inputTransferTo.value|| acc.owner===inputTransferTo.value)
+  inputTransferAmount.value=inputTransferTo.value=''
+  inputTransferAmount.blur()
+  
+  if(amount>0 && currentAccount.balance >=amount&&receiveAcc?.username!==currentAccount.username ){
+    // console.log('Completely Transfered');
+    currentAccount.movements.push(-amount)
+    receiveAcc.movements.push(amount)
+
+    updateUi(currentAccount)
+  }
+
+})
 
 
 
