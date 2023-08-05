@@ -176,6 +176,20 @@ btnTransfer.addEventListener('click',function(e){
 
 });
 
+btnLoan.addEventListener('click',function(e){
+  e.preventDefault();
+const amount= Number(inputLoanAmount.value)
+if( amount>0 && currentAccount.movements.some(mov=>mov>=amount*0.1) ){
+  // Add movement
+  currentAccount.movements.push(amount);
+  //Update UI
+  updateUi(currentAccount)
+}
+inputLoanAmount.value=''
+
+})
+
+
 //close //findIndex
 btnClose.addEventListener('click',function(e){
   e.preventDefault()
@@ -250,3 +264,17 @@ const totalDepositToUsd=movements.filter(mov=>mov>0)
 })
 .reduce((acc,mov)=>acc+mov,0)
 console.log(totalDepositToUsd)
+
+
+//some
+const anyDeposit = movements.some(mov=>mov>1500)
+console.log(anyDeposit)
+
+//every 
+console.log(movements.every(mov=>mov>0));
+
+//separate callback
+const deposit =mov=>mov>0
+console.log(movements.some(deposit))
+console.log(movements.every(deposit))
+console.log(movements.filter(deposit))
