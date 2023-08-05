@@ -64,9 +64,13 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 //Write Code inside
-const displayMovements=function(movements){
+const displayMovements=function(movements , sort = false){
     containerMovements.innerHTML=''
-    movements.forEach(function(mov, i){
+
+    const movs= sort ? movements.slice().sort((a,b)=>a-b): movements
+
+
+    movs.forEach(function(mov, i){
         const type = mov>0 ?'deposit':'withdrawal'
         const html =`
         <div class="movements__row">
@@ -208,6 +212,12 @@ btnClose.addEventListener('click',function(e){
   
 });
 
+let sorted = false;
+ btnSort.addEventListener('click',function(e){
+  e.preventDefault();
+  displayMovements(currentAccount.movements,!sorted);
+  sorted=!sorted
+ })
 
 
 
@@ -278,3 +288,38 @@ const deposit =mov=>mov>0
 console.log(movements.some(deposit))
 console.log(movements.every(deposit))
 console.log(movements.filter(deposit))
+
+
+// sorting array
+const owners=['Jonas','Zach','Adam','Martha']
+console.log(owners.sort())
+// console.log()
+
+//Numbers
+console.log(movements);
+// console.log(movements.sort())
+ //return <0 A,B(keep order)
+ //return >0 B,A(switch order)
+
+ //Ascending
+// movements.sort((a,b) => {
+//   if(a>b){
+//     return 1;
+//   }
+//   if(a<b){
+//     return -1;
+//   }
+// });
+movements.sort((a,b) => a-b );
+console.log(movements)
+//Descending
+// movements.sort((a,b) => {
+//   if(a>b){
+//     return -1;
+//   }
+//   if(a<b){
+//     return 1;
+//   }
+// });
+movements.sort((a,b) => b - a );
+console.log(movements);
