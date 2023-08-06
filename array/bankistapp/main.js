@@ -67,7 +67,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 const displayMovements=function(movements , sort = false){
     containerMovements.innerHTML=''
 
-    const movs= sort ? movements.slice().sort((a,b)=>a-b): movements
+    const movs = sort ? movements.slice().sort((a,b)=>a-b): movements
 
 
     movs.forEach(function(mov, i){
@@ -216,6 +216,7 @@ let sorted = false;
  btnSort.addEventListener('click',function(e){
   e.preventDefault();
   displayMovements(currentAccount.movements,!sorted);
+  console.log(sorted)
   sorted=!sorted
  })
 
@@ -323,3 +324,29 @@ console.log(movements)
 // });
 movements.sort((a,b) => b - a );
 console.log(movements);
+
+
+//Empty array + fill method 
+const arr= [1,2,3,4,5,6,7];
+console.log(new Array(1,2,3,4,5,6,8))
+
+const x = new Array(7)
+console.log(x)
+x.fill(1)
+x.fill(1,3,5)
+console.log(x)
+arr.fill(23,2,6) // It's similar to slice method
+console.log(arr)
+
+//Array.from
+const y = Array.from({length:7},()=>1);
+console.log(y)
+
+const z = Array.from({length:7},(cur,i)=>i+1) // Array.From to generate Array, it's like a map
+console.log(z)
+
+labelBalance.addEventListener('click',function(){
+  const movementUi = Array.from(document.querySelectorAll('.movements__value'),el=>el.textContent.replace('$',''));
+  console.log(movementUi)
+
+})
