@@ -21,7 +21,7 @@ const account1 = {
     '2023-08-08T10:51:36.790Z',
   ],
   currency: 'EUR',
-  locale: 'pt-PT', // de-DE
+  locale: 'pt-PT', // de-DE 
 };
 
 const account2 = {
@@ -40,7 +40,7 @@ const account2 = {
     '2023-07-26T12:01:20.894Z',
   ],
   currency: 'USD',
-  locale: 'en-US',
+  locale: 'en-US', 
 };
 
 const accounts = [account1, account2];
@@ -104,7 +104,7 @@ return new Intl.DateTimeFormat(locale).format(date);
 const formatCur= function(value,locale,currency){
   return new Intl.NumberFormat(locale,{
     style:'currency',
-    currency:currency
+    currency:currency,
   }).format(value);
 
 }
@@ -134,6 +134,7 @@ const displayMovements=function(acc, sort = false){
         // console.log(containerMovements.innerHTML)
     })
 }
+
 
 const creatUserNames = function(accs){
   accs.forEach(function(acc){
