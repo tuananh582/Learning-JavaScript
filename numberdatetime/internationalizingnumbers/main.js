@@ -73,7 +73,7 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 //Write Code inside
-const formatMovementDate=function (date){
+const formatMovementDate=function (date,locale){
   // console.log(date)
   const calccdayPassed = (date1,date2)=>Math.round(Math.abs(date2-date1)/(1000*60*60*24));
   const dayPassed=calccdayPassed(new Date(),date)
@@ -87,19 +87,27 @@ const formatMovementDate=function (date){
   if(dayPassed<=7){
     return `${dayPassed} days ago`;
   }
-  else{
+//   else{
     
-    const day = `${date.getDay()}`.padStart(2,0)
-    const month =`${date.getMonth()+1}`.padStart(2,0)
-    const year=date.getFullYear();
-    return `${day}/${month}/${year}`
-  }
+//     const day = `${date.getDay()}`.padStart(2,0)
+//     const month =`${date.getMonth()+1}`.padStart(2,0)
+//     const year=date.getFullYear();
+//     return `${day}/${month}/${year}`
+//   }
+return new Intl.DateTimeFormat(locale).format(date);
   // const hour=date.getHours();
   // const min = date.getMinutes();
   // labelDate.textContent=`${day}/${month}/${year},${hour}:${min}`;
   // const displayDate =`${day}/${month}/${year}`;
 }
 
+const formatCur= function(value,locale,currency){
+  return new Intl.NumberFormat(locale,{
+    style:'currency',
+    currency:currency
+  }).format(value);
+
+}
 
 const displayMovements=function(acc, sort = false){
   containerMovements.innerHTML=''
@@ -111,14 +119,15 @@ const displayMovements=function(acc, sort = false){
     const type = mov>0 ?'deposit':'withdrawal';
     const date = new Date(acc.movementsDates[i]);
 
-    const displayDate =formatMovementDate(date)
+    const displayDate =formatMovementDate(date,acc.locale)
+    const formattedMovement = formatCur(mov,acc.locale,acc.currency)
 
 
         const html =`
         <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i+1} ${type}</div>
         <div class="movements__date">${displayDate}</div>
-        <div class="movements__value">${mov.toFixed(3)} $</div>
+        <div class="movements__value">${formattedMovement} </div>
       </div>
         `
         containerMovements.insertAdjacentHTML('afterbegin',html)
@@ -136,27 +145,33 @@ const creatUserNames = function(accs){
 }
 
 creatUserNames(accounts)
+
+
 const calcDisplaySummary = function(acc){
-  const incomes=acc.movements.filter(mov=>mov>0).reduce((acc,mov)=>acc+mov,0)
-  labelSumIn.textContent=`${incomes.toFixed(3)} $ `
+  const incomes =acc.movements.filter(mov=>mov>0).reduce((acc,mov)=>acc+mov,0);
+  labelSumIn.textContent=formatCur(incomes.toFixed(3),acc.locale,acc.currency);
+ 
 
   const out= acc.movements.filter(mov=>mov<0).reduce((acc,mov)=>acc+mov,0)
-  labelSumOut.textContent=`${Math.abs(out).toFixed(3)} $ ` // remove sign , negative value
-  
+  labelSumOut.textContent=formatCur(Math.abs(out).toFixed(3),acc.locale,acc.currency) // remove sign , negative value
+
   // const interest = movements.filter(mov=>mov>0).map(deposit=>deposit*1.2/100).filter((int,i,array)=>{
   //   return int>=10
   // }).reduce((acc,int)=>acc+int,0);
   const interest =acc.movements.filter(mov=>mov>0).map(deposit=>deposit*acc.interestRate/100).filter((int,i,array)=>{
     return int>=10
   }).reduce((acc,int)=>acc+int,0);
-  labelSumInterest.textContent=`${interest.toFixed(3)} $`
+  labelSumInterest.textContent=formatCur(interest.toFixed(3),acc.locale,acc.currency)
+  // labelSumInterest.textContent=`${interest.toFixed(3)} $`
 }
 
 console.log(accounts)
 const calcPrintBalance =function(acc){
   acc.balance=acc.movements.reduce((acc,cur)=>acc+cur,0)
   // acc.balance=balance
-  labelBalance.textContent=` $ ${acc.balance.toFixed(2)}`
+  //  formatCur(acc.balance,acc.locale,acc.currency)
+
+  labelBalance.textContent=  formatCur(acc.balance,acc.locale,acc.currency)
   
 
 }
@@ -168,7 +183,28 @@ calcPrintBalance(acc);
 calcDisplaySummary(acc)
 }
 //Event Handler
+
+//Experimenting API
+const news = new Date();
+const options ={
+    hour:'numeric',
+    minute:'numeric',
+    day: 'numeric',
+    month:'long',
+    year:'numeric', // or 2 digit
+    weekday: 'long'
+    
+}
+const locale = navigator.language;
+console.log(locale)
+
+
+labelDate.textContent= new Intl.DateTimeFormat(locale,options).format(news)
+
 let currentAccount;
+
+
+
 
 btnLogin.addEventListener('click',function(e){
   //Prevent form from submitting 
@@ -188,13 +224,32 @@ btnLogin.addEventListener('click',function(e){
     labelWelcome.textContent=`Welecomback, ${currentAccount.owner}`; // Welcomback Full Name
     containerApp.style.opacity=100;
 // Current Date
-    const now= new Date();
-    const day = `${now.getDate()}`.padStart(2,0);
-    const month = `${now.getMonth()+1}`.padStart(2,0);
-    const year = now.getFullYear();
-    const hour= `${now.getHours()}`.padStart(2,0);
-    const min = `${now.getMinutes()}`.padStart(2,0);
-    labelDate.textContent=`${day}/${month}/${year},${hour}:${min}`;
+    // const now= new Date();
+    // const day = `${now.getDate()}`.padStart(2,0);
+    // const month = `${now.getMonth()+1}`.padStart(2,0);
+    // const year = now.getFullYear();
+    // const hour= `${now.getHours()}`.padStart(2,0);
+    // const min = `${now.getMinutes()}`.padStart(2,0);
+    // labelDate.textContent=`${day}/${month}/${year},${hour}:${min}`;
+
+    //Add international time
+    const news = new Date();
+const options ={
+    hour:'numeric',
+    minute:'numeric',
+    day: 'numeric',
+    month:'numeric',
+    year:'numeric', // or 2 digit
+    // weekday: 'long'
+
+}
+// const locale = navigator.language;
+// console.log(locale)
+
+
+labelDate.textContent= new Intl.DateTimeFormat(currentAccount.locale,options).format(news)
+
+
     //Clear input fields
     inputLoginUsername.value=inputLoginPin.value='';
     // inputLoginPin.value=inputLoginUsername.value='';
@@ -580,3 +635,16 @@ const calccdayPassed = (date1,date2)=>Math.abs(date2-date1)/(1000*60*60*24);
 const days1=calccdayPassed(new Date(2037,3,4), new Date(2037,3,14));
 console.log(days1);
 
+const numInt =3884764.23;
+const optionsa={
+  style:"currency",
+  unit:'celsius',
+  currency:'EUR',
+  useGrouping:false,
+};
+
+
+console.log('Us:', new Intl.NumberFormat('en-US',optionsa).format(numInt));
+console.log('Germany:', new Intl.NumberFormat('de-DE',optionsa).format(numInt));
+console.log('Syria:', new Intl.NumberFormat('ar-SY',optionsa).format(numInt));
+console.log(navigator.language,new Intl.NumberFormat(navigator.language,optionsa).format(numInt))
