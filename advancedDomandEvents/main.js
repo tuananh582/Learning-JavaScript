@@ -40,8 +40,8 @@ console.log(allButton);
 //Creating and inserting elements
 //.insertAdjacenHTml
 
-const message=document.createElement('div')
-message.classList.add('cookie-message')
+const message=document.createElement('div');
+message.classList.add('cookie-message');
 // message.textContent='We use cookired for improved functionality and anlytics';
 message.innerHTML= 'We use cookired for improved functionality and anlytics <button class="btn btn--close-cookie">Got It</button> ';
 
@@ -56,3 +56,41 @@ document.querySelector('.btn--close-cookie').addEventListener('click',function()
     // message.remove();
     message.parentElement.removeChild(message)
 })
+
+//Styles
+message.style.backgroundColor='#37383d'
+message.style.width='120%'
+
+console.log(message.style.backgroundColor)
+
+console.log(getComputedStyle(message).color)
+console.log(getComputedStyle(message).height)
+
+message.style.height=Number.parseFloat(getComputedStyle(message).height,10)+30+'px'
+
+document.documentElement.style.setProperty('--color-primary','orangered')
+
+//Attributes
+const logo = document.querySelector('.nav__logo')
+console.log(logo.alt);
+console.log(logo.src);//output htttps:...
+console.log(logo.className);
+logo.alt = 'Beautiful minimalisst logo'
+logo.setAttribute('company','Bankist')
+console.log(logo.getAttribute('src'))// output img/logo.png
+
+const link = document.querySelector('.nav__link--btn')
+console.log(link.href)
+console.log(link.getAttribute('href'))
+
+//Data attributes
+console.log(logo.dataset.versionNumber)
+
+//Classes
+logo.classList.add('c')
+logo.classList.remove('c')
+logo.classList.toggle('c')
+logo.classList.contain('c')
+
+// Don't use this
+logo.className='tuan anh'
