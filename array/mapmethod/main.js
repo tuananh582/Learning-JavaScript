@@ -24,3 +24,4 @@ const movementDescription=movements.map((mov,i)=>
     `Movements ${i+1} : You ${mov>0 ? 'deposited':'withdrew'} ${Math.abs(mov)}`
 )
 console.log(movementDescription)
+

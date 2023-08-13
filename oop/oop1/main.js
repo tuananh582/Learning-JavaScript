@@ -43,3 +43,20 @@ Person.prototype.species='Homo Sapienes';
 console.log(jack.species,matilda.species)
 
 console.log(jack.hasOwnProperty('firstName'));
+
+//Object.prototype (top of prototype chain)
+console.log(jack.__proto__.__proto__)
+console.log(jack.__proto__.__proto__.__proto__)
+
+console.dir(Person.prototype.constructor)
+
+const arr=[3,6,6,7,7,8,9,11];
+console.log(arr.__proto__)
+console.log(arr.__proto__===Array.prototype)
+
+Array.prototype.unique = function(){
+     return [...new Set(this)]
+}
+console.log(arr.unique())
+
+const h1 = document.querySelector('h1')
