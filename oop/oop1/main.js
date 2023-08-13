@@ -34,3 +34,12 @@ tuananh.calcAge();//it can access beacause inheritance
 matilda.calcAge();
 console.log(tuananh.__proto__)
 console.log(tuananh.__proto__===Person.prototype)// true
+
+console.log(Person.prototype.isPrototypeOf(jack))
+console.log(Person.prototype.isPrototypeOf(Person))// false
+
+
+Person.prototype.species='Homo Sapienes';
+console.log(jack.species,matilda.species)
+
+console.log(jack.hasOwnProperty('firstName'));
