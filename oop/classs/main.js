@@ -127,3 +127,81 @@ class StudentsCl extends PersonCl{
 const martha = new StudentsCl('Phun Anh',2003,'Information Teachnology')
 martha.introduce();
 martha.calcAge();
+
+//
+const StudentProto= Object.create(PersonProto);
+StudentProto.init=function(firstName,birthYear,course){
+    PersonProto.init.call(this,firstName,birthYear);
+    this.course=course
+}
+StudentProto.introduce = function(){
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+}
+const jay = Object.create(StudentProto)
+jay.init('Jay',2010,'Compputer')
+jay.introduce()
+jay.calcAge()
+
+//
+class Account{
+    //Public fiels
+    locale=navigator.language;
+    //Private Fields
+    #movements = [];
+
+     #pin;
+
+    constructor(owner,currency,pin){
+        this.owner=owner;
+        this.currency=currency;
+        this.#pin=pin;
+        //Protected property
+        // this._movements=[];
+        // this.locale = navigator.language
+    }
+    
+    //Public interface
+    getMovement(){ // can access movements
+        return this.#movements;
+    }
+    deposit(val){
+        this.#movements.push(val)
+        return this
+    }
+    withdraw(val){
+        this.deposit(-val)
+        return this;
+    }
+    _approveLoan(val){
+        return true;
+    }
+    requestLoan(val){
+        if(this._approveLoan(val)){
+            this.deposit(val)
+            console.log(`${this}`)// this is current object
+            return this;
+            
+        }
+    }
+    //Private  Methods
+    #approveLoan(val){
+        return true;
+    }
+}
+const acc1= new Account('Tuan Anh','EuRO',111,)
+// acc1.movements.push(250)
+// acc1.movements.push(-14)
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+acc1._approveLoan(1200)
+console.log(acc1)
+
+console.log(acc1.getMovement())
+//Protect
+// Private Class
+// console.log(acc1.#pin)// Euro
+
+//Chaining 
+acc1.deposit(300).deposit(400).withdraw(353).requestLoan(25000).withdraw(4000)// you have to return this in order to do that
+console.log(acc1.getMovement())
