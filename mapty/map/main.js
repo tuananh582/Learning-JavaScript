@@ -61,7 +61,23 @@ let map,mapEvent;
 //     inputCadence.closest('.form__row').classList.toggle('form__row--hidden')
 // })
 
+
+
+
+
+
 //Refactoring code using Class
+
+class workout{
+    date = new Date();
+    
+    constructor(coords,distance,duration){
+        this.coords=coords;
+        this.distance=distance;
+        this.duration=duration;
+    }
+}
+
 
 class App{
     #map;
@@ -71,7 +87,7 @@ class App{
         this._getPosition();
         form.addEventListener('submit',this._newWorkOut.bind(this));
             //Clear input Fields
-            inputType.addEventListener('change',this._toggleElavationFieldd)
+        inputType.addEventListener('change',this._toggleElavationFieldd)
                
        
 
