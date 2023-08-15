@@ -16,4 +16,5 @@ var num=10
 
 function deleteshopppingcart(){
     console.log('All Products deleted')
-}
+};
+console.log('Hey Jude')
