@@ -70,14 +70,46 @@ let map,mapEvent;
 
 class workout{
     date = new Date();
-    
+    id = ( Date.now()+'').slice(-10);
+
     constructor(coords,distance,duration){
         this.coords=coords;
         this.distance=distance;
         this.duration=duration;
+        // this.date=...;
     }
 }
 
+class Running extends workout{
+    constructor(coords,distance,duration,cardence){
+        super(coords,distance,duration)
+        this.cardence=cardence;
+        this.calcPace();
+    }
+    calcPace(){
+        this.pace= this.duration/this.distance;
+        return this.pace;
+        
+    }
+}
+class Cycling extends workout{
+    constructor(coords,distance,duration,cardence,elevationGain){
+        super(coords,distance,duration)
+        this.cardence=cardence;
+        this.elevationGain=elevationGain;
+        this.clacSpped();
+    }
+    clacSpped(){
+        this.speed= this.distance/(this.duration/60);
+        return this.speed
+    }
+   
+}
+
+const run1= new Running([39,-12],5.2,24,178);
+const cycle= new Cycling([39,-12],27,95,523);
+// const = new Running([39,-12],5.2,24,178);
+console.log(run1,cycle)
 
 class App{
     #map;
